@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOPHRON</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- TITLEBAR -->
+<div class="titlebar">
+  <div class="titlebar-drag">
+    <span class="app-name">SOPHRON</span>
+    <span class="app-tagline" id="rm-trigger">σώφρων</span>
+  </div>
+  <div class="titlebar-controls">
+    <button class="ctrl-btn" id="btn-darkmode" title="Modo oscuro">◐</button>
+    <button class="ctrl-btn" id="btn-fullscreen" title="Pantalla completa">⛶</button>
+    <button class="ctrl-btn" id="btn-minimize" title="Minimizar">─</button>
+    <button class="ctrl-btn" id="btn-maximize" title="Maximizar">□</button>
+    <button class="ctrl-btn close" id="btn-close" title="Cerrar">✕</button>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-section">
+      <div class="nav-item active" data-view="dashboard">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Dashboard</span>
+      </div>
+      <div class="nav-item" data-view="tasks">
+        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        <span>Tareas</span>
+      </div>
+      <div class="nav-item" data-view="goals">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
+        <span>Metas</span>
+      </div>
+      <div class="nav-item" data-view="calendar">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Agenda</span>
+      </div>
+      <div class="nav-item" data-view="expenses">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        <span>Gastos</span>
+      </div>
+      <div class="nav-item" data-view="flow">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><line x1="12" y1="7" x2="12" y2="13"/><line x1="12" y1="13" x2="5" y2="17"/><line x1="12" y1="13" x2="19" y2="17"/></svg>
+        <span>Flujo</span>
+      </div>
+      <div class="nav-item" data-view="cork">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Tablero</span>
+      </div>
+      <div class="nav-item" data-view="balance">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+        <span>Balance</span>
+      </div>
+      <div class="nav-item" data-view="notes">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <span>Notas</span>
+      </div>
+    </div>
+
+    <div class="sidebar-bottom">
+      <div id="rr-dot">♪</div>
+      <div class="nav-item" data-view="settings">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span>Ajustes</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main" id="main-content">
+
+    <!-- DASHBOARD -->
+    <div class="view active" id="view-dashboard">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Dashboard</h1>
+          <p class="view-subtitle" id="dashboard-date">—</p>
+        </div>
+      </div>
+
+      <div class="bento-grid">
+        <div class="bento-card bento-wide">
+          <div class="bento-label">Tareas pendientes</div>
+          <div class="bento-number" id="dash-tasks-pending">0</div>
+          <div class="bento-progress-bar">
+            <div class="bento-progress-fill" id="dash-tasks-bar" style="width:0%"></div>
+          </div>
+          <div class="bento-sub" id="dash-tasks-sub">de 0 totales</div>
+        </div>
+
+        <div class="bento-card">
+          <div class="bento-label">Hoy</div>
+          <div class="bento-number accent" id="dash-events-today">0</div>
+          <div class="bento-sub">eventos</div>
+        </div>
+
+        <div class="bento-card">
+          <div class="bento-label">Esta semana</div>
+          <div class="bento-number" id="dash-events-week">0</div>
+          <div class="bento-sub">eventos</div>
+        </div>
+
+        <div class="bento-card bento-tall">
+          <div class="bento-label">Gasto del mes</div>
+          <div class="bento-number red" id="dash-expenses-month">$0</div>
+          <div class="bento-sub" id="dash-expenses-sub">0 transacciones</div>
+          <canvas id="dash-expenses-chart" height="80"></canvas>
+        </div>
+
+        <div class="bento-card bento-wide">
+          <div class="bento-label">Próximos eventos</div>
+          <div class="bento-list" id="dash-upcoming-list">
+            <div class="bento-empty">Sin eventos próximos</div>
+          </div>
+        </div>
+
+        <div class="bento-card">
+          <div class="bento-label">Tareas críticas</div>
+          <div class="bento-list" id="dash-critical-list">
+            <div class="bento-empty">Sin tareas críticas</div>
+          </div>
+        </div>
+
+        <div class="bento-card">
+          <div class="bento-label">Balance</div>
+          <div class="bento-number green" id="dash-balance">$0</div>
+          <div class="bento-sub">disponible</div>
+        </div>
+
+        <div class="bento-card bento-wide">
+          <div class="bento-label">Tareas por categoría</div>
+          <div class="dash-chart-wrap">
+            <canvas id="dash-tasks-chart" height="110"></canvas>
+            <div class="dash-chart-legend" id="dash-tasks-legend"></div>
+          </div>
+        </div>
+
+        <div class="bento-card bento-wide">
+          <div class="bento-label">Gastos del mes por categoría</div>
+          <div class="dash-chart-wrap">
+            <canvas id="dash-exp-chart" height="110"></canvas>
+            <div class="dash-chart-legend" id="dash-exp-legend"></div>
+          </div>
+        </div>
+
+        <div class="bento-card">
+          <div class="bento-label">Cotizador rápido</div>
+          <div class="bento-sub" style="margin-bottom:8px">¿Qué pasa si compro algo?</div>
+          <button class="btn-primary" style="width:100%" id="btn-dash-cotizador">🛒 Abrir cotizador</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASKS -->
+    <div class="view" id="view-tasks">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Tareas</h1>
+          <p class="view-subtitle">Gestiona tu lista de pendientes</p>
+        </div>
+        <button class="btn-primary" id="btn-add-task">+ Nueva tarea</button>
+      </div>
+
+      <div class="filters-bar">
+        <button class="filter-btn active" data-filter="all">Todas</button>
+        <button class="filter-btn" data-filter="pending">Pendientes</button>
+        <button class="filter-btn" data-filter="done">Completadas</button>
+        <div class="filter-sep"></div>
+        <select class="filter-select" id="task-category-filter">
+          <option value="all">Todas las categorías</option>
+          <option value="work">Trabajo</option>
+          <option value="personal">Personal</option>
+          <option value="health">Salud</option>
+          <option value="finance">Finanzas</option>
+          <option value="other">Otro</option>
+        </select>
+        <select class="filter-select" id="task-priority-filter">
+          <option value="all">Todas las prioridades</option>
+          <option value="high">Alta</option>
+          <option value="medium">Media</option>
+          <option value="low">Baja</option>
+        </select>
+      </div>
+
+      <div class="task-list" id="task-list"></div>
+    </div>
+
+    <!-- CALENDAR -->
+    <div class="view" id="view-calendar">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Agenda</h1>
+          <p class="view-subtitle" id="cal-month-label">—</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn-ghost" id="cal-prev">‹</button>
+          <button class="btn-ghost" id="cal-today">Hoy</button>
+          <button class="btn-ghost" id="cal-next">›</button>
+          <button class="btn-primary" id="btn-add-event">+ Evento</button>
+        </div>
+      </div>
+      <div class="calendar-layout">
+        <div class="calendar-grid-wrap">
+          <div class="calendar-days-header">
+            <div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div><div>Dom</div>
+          </div>
+          <div class="calendar-grid" id="cal-grid"></div>
+        </div>
+        <div class="calendar-sidebar">
+          <div class="cal-sidebar-title" id="cal-selected-label">Selecciona un día</div>
+          <div class="cal-events-list" id="cal-day-events">
+            <div class="bento-empty">Sin eventos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPENSES -->
+    <div class="view" id="view-expenses">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Gastos</h1>
+          <p class="view-subtitle">Registro de ingresos y egresos</p>
+        </div>
+        <div class="header-actions" id="exp-header-actions">
+          <button class="btn-ghost" id="btn-cotizador">🛒 Cotizador</button>
+          <button class="btn-primary" id="btn-add-expense">+ Registrar</button>
+        </div>
+      </div>
+
+      <!-- Sub-tabs -->
+      <div class="tab-bar">
+        <button class="tab-btn active" data-exp-tab="registros">📋 Registro</button>
+        <button class="tab-btn" data-exp-tab="presupuestos">🎯 Presupuestos</button>
+        <button class="tab-btn" data-exp-tab="metas">🏦 Metas de ahorro</button>
+        <button class="tab-btn" data-exp-tab="recurrentes">🔄 Recurrentes</button>
+      </div>
+
+      <!-- TAB: Registro -->
+      <div class="exp-tab-panel active" id="exptab-registros">
+
+        <!-- Selector de mes + stats globales -->
+        <div class="exp-history-header">
+          <div class="exp-month-nav">
+            <button class="btn-ghost icon-btn" id="btn-exp-prev">‹</button>
+            <div class="exp-month-label" id="exp-month-label">Todos los meses</div>
+            <button class="btn-ghost icon-btn" id="btn-exp-next">›</button>
+          </div>
+          <button class="btn-ghost btn-sm" id="btn-exp-all" title="Ver todos los meses">☰ Todos</button>
+        </div>
+
+        <!-- Stats del mes seleccionado -->
+        <div class="expense-summary">
+          <div class="expense-stat green"><div class="stat-label">Ingresos</div><div class="stat-value" id="exp-income">$0</div></div>
+          <div class="expense-stat red"><div class="stat-label">Egresos</div><div class="stat-value" id="exp-outcome">$0</div></div>
+          <div class="expense-stat"><div class="stat-label">Balance</div><div class="stat-value" id="exp-balance">$0</div></div>
+          <div class="expense-stat accent"><div class="stat-label">Movimientos</div><div class="stat-value" id="exp-count">0</div></div>
+        </div>
+
+        <!-- Lista agrupada por mes -->
+        <div id="expense-groups"></div>
+
+      </div>
+
+      <!-- TAB: Presupuestos -->
+      <div class="exp-tab-panel" id="exptab-presupuestos">
+        <div class="tab-panel-header">
+          <p class="tab-panel-desc">Límites de gasto mensual por categoría</p>
+          <button class="btn-primary" id="btn-add-budget">+ Agregar categoría</button>
+        </div>
+        <div class="budget-list" id="budget-list">
+          <div class="empty-state">No hay presupuestos configurados</div>
+        </div>
+      </div>
+
+      <!-- TAB: Metas de ahorro -->
+      <div class="exp-tab-panel" id="exptab-metas">
+        <div class="tab-panel-header">
+          <p class="tab-panel-desc">Tus objetivos de ahorro</p>
+          <button class="btn-primary" id="btn-add-saving">+ Nueva meta</button>
+        </div>
+        <div class="saving-goals-grid" id="saving-goals-list">
+          <div class="empty-state">No tienes metas de ahorro aún</div>
+        </div>
+      </div>
+
+      <!-- TAB: Recurrentes -->
+      <div class="exp-tab-panel" id="exptab-recurrentes">
+        <div class="tab-panel-header">
+          <p class="tab-panel-desc">Transacciones que se repiten (salario, renta, suscripciones...)</p>
+          <div style="display:flex;gap:8px">
+            <button class="btn-ghost" id="btn-apply-recurrents">⚡ Aplicar pendientes</button>
+            <button class="btn-primary" id="btn-add-recurrent">+ Nuevo</button>
+          </div>
+        </div>
+        <div class="recurrent-list" id="recurrent-list">
+          <div class="empty-state">No hay recurrentes configurados</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FLOW -->
+    <div class="view" id="view-flow">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Diagrama de flujo</h1>
+          <p class="view-subtitle">Visualiza procesos y decisiones</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn-ghost" id="btn-add-node-start">+ Inicio</button>
+          <button class="btn-ghost" id="btn-add-node-process">+ Proceso</button>
+          <button class="btn-ghost" id="btn-add-node-decision">+ Decisión</button>
+          <button class="btn-ghost" id="btn-add-node-end">+ Fin</button>
+          <button class="btn-ghost" id="btn-flow-connect">Conectar</button>
+          <button class="btn-ghost danger" id="btn-flow-clear">Limpiar</button>
+        </div>
+      </div>
+      <div class="flow-canvas-wrap">
+        <svg class="flow-svg" id="flow-svg"></svg>
+        <div class="flow-canvas" id="flow-canvas"></div>
+      </div>
+      <div class="flow-hint" id="flow-hint">Agrega nodos y conéctalos arrastrando entre ellos</div>
+    </div>
+
+    <!-- CORKBOARD -->
+    <div class="view" id="view-cork">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Tablero</h1>
+          <p class="view-subtitle">Conecta ideas, fotos y notas</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn-ghost" id="btn-cork-note">+ Nota</button>
+          <button class="btn-ghost" id="btn-cork-photo">+ Foto</button>
+          <button class="btn-ghost" id="btn-cork-connect">Hilo rojo</button>
+          <button class="btn-ghost danger" id="btn-cork-clear">Limpiar</button>
+        </div>
+      </div>
+      <div class="cork-wrap">
+        <svg class="cork-svg" id="cork-svg"></svg>
+        <div class="cork-board" id="cork-board"></div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="view" id="view-settings">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Ajustes</h1>
+          <p class="view-subtitle">Personaliza tu experiencia</p>
+        </div>
+      </div>
+
+      <div class="settings-scroll">
+
+        <!-- TEMAS -->
+        <div class="settings-section-title">Temas</div>
+        <div class="themes-grid" id="themes-grid">
+
+          <div class="theme-card active" data-theme="default">
+            <div class="theme-preview" style="background:#F8F9FA">
+              <div class="theme-prev-sidebar" style="background:#FFFFFF;border-right:2px solid #E9ECEF"></div>
+              <div class="theme-prev-content">
+                <div class="theme-prev-bar" style="background:#206BC4"></div>
+                <div class="theme-prev-bar" style="background:#E9ECEF;width:60%"></div>
+              </div>
+            </div>
+            <div class="theme-name">Default</div>
+            <button class="theme-img-btn" data-edit-theme="default">✏ Editar</button>
+          </div>
+
+          <div class="theme-card" data-theme="dark">
+            <div class="theme-preview" style="background:#141414">
+              <div class="theme-prev-sidebar" style="background:#1E1E1E;border-right:2px solid #2E2E2E"></div>
+              <div class="theme-prev-content">
+                <div class="theme-prev-bar" style="background:#206BC4"></div>
+                <div class="theme-prev-bar" style="background:#2E2E2E;width:60%"></div>
+              </div>
+            </div>
+            <div class="theme-name">Dark</div>
+            <button class="theme-img-btn" data-edit-theme="dark">✏ Editar</button>
+          </div>
+
+          <div class="theme-card" data-theme="pastel">
+            <div class="theme-preview" style="background:#FFF0F5">
+              <div class="theme-prev-sidebar" style="background:#FFE4EF;border-right:2px solid #FFCCE0"></div>
+              <div class="theme-prev-content">
+                <div class="theme-prev-bar" style="background:#E91E8C"></div>
+                <div class="theme-prev-bar" style="background:#FFCCE0;width:60%"></div>
+              </div>
+            </div>
+            <div class="theme-name">Rosa Pastel</div>
+            <button class="theme-img-btn" data-edit-theme="pastel">✏ Editar</button>
+          </div>
+
+          <div class="theme-card" data-theme="empire">
+            <div class="theme-preview theme-preview-bg" id="empire-preview" style="background:#0A0A0A">
+              <div class="theme-prev-sidebar" style="background:rgba(20,0,0,0.8);border-right:2px solid #8B0000"></div>
+              <div class="theme-prev-content">
+                <div class="theme-prev-bar" style="background:#CC0000"></div>
+                <div class="theme-prev-bar" style="background:#1A0000;width:60%"></div>
+              </div>
+            </div>
+            <div class="theme-name">Imperio ⚙</div>
+            <div class="theme-img-badge" id="empire-img-status">Sin imagen</div>
+            <div class="theme-saved-actions">
+              <button class="theme-img-btn" data-theme-img="empire">+ Imagen</button>
+              <button class="theme-img-btn" data-edit-theme="empire">✏ Editar</button>
+            </div>
+          </div>
+
+          <div class="theme-card" data-theme="rickmorty">
+            <div class="theme-preview" id="rickmorty-preview" style="background:#0D1F0D">
+              <div class="theme-prev-sidebar" style="background:rgba(10,30,10,0.9);border-right:2px solid #39FF14"></div>
+              <div class="theme-prev-content">
+                <div class="theme-prev-bar" style="background:#39FF14"></div>
+                <div class="theme-prev-bar" style="background:#1A3A1A;width:60%"></div>
+              </div>
+            </div>
+            <div class="theme-name">Rick & Morty</div>
+            <div class="theme-img-badge" id="rickmorty-img-status">Sin imagen</div>
+            <div class="theme-saved-actions">
+              <button class="theme-img-btn" data-theme-img="rickmorty">+ Imagen</button>
+              <button class="theme-img-btn" data-edit-theme="rickmorty">✏ Editar</button>
+            </div>
+          </div>
+
+          <div class="theme-card" data-theme="vaporwave">
+            <div class="theme-preview" id="vaporwave-preview" style="background:#1A0533">
+              <div class="theme-prev-sidebar" style="background:rgba(30,5,60,0.85);border-right:2px solid #FF71CE"></div>
+              <div class="theme-prev-content">
+                <div class="theme-prev-bar" style="background:#FF71CE"></div>
+                <div class="theme-prev-bar" style="background:#2D0A52;width:60%"></div>
+              </div>
+            </div>
+            <div class="theme-name">Vaporwave</div>
+            <div class="theme-img-badge" id="vaporwave-img-status">Sin imagen</div>
+            <div class="theme-saved-actions">
+              <button class="theme-img-btn" data-theme-img="vaporwave">+ Imagen</button>
+              <button class="theme-img-btn" data-edit-theme="vaporwave">✏ Editar</button>
+            </div>
+          </div>
+
+          <!-- TEMAS PERSONALIZADOS GUARDADOS -->
+          <div class="theme-card theme-card-custom theme-card-new" id="btn-new-custom-theme-card">
+            <div class="theme-preview" style="background: linear-gradient(135deg,#e0e7ff,#f0fdf4)">
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:28px">＋</div>
+            </div>
+            <div class="theme-name">Nuevo tema</div>
+          </div>
+
+        </div>
+
+        <!-- TEMAS GUARDADOS -->
+        <div id="saved-themes-section" style="display:none">
+          <div class="settings-section-title" style="margin-top:8px">Temas guardados</div>
+          <div class="themes-grid" id="saved-themes-grid"></div>
+        </div>
+
+        <!-- TEMAS SECRETOS -->
+        <div id="secret-themes-section" style="display:none">
+          <div class="settings-section-title" style="margin-top:8px">🔒 Temas secretos</div>
+          <div class="themes-grid" id="secret-themes-grid">
+            <div class="theme-card secret-theme-card" id="theme-card-matrix" data-theme="matrix" style="display:none">
+              <div class="theme-preview" style="background:#000;position:relative;overflow:hidden">
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;color:#00FF41;font-size:10px;line-height:1.3;opacity:0.7;padding:4px">アイウカ01ネ<br>ク10ニア01サ<br>ス00セタ01チ</div>
+                <div class="theme-prev-sidebar" style="background:rgba(0,20,0,0.9);border-right:2px solid #00FF41"></div>
+                <div class="theme-prev-content">
+                  <div class="theme-prev-bar" style="background:#00FF41"></div>
+                  <div class="theme-prev-bar" style="background:#003A00;width:60%"></div>
+                </div>
+              </div>
+              <div class="theme-name">Matrix <span style="font-size:0.7em;opacity:0.6">🔓</span></div>
+            </div>
+            <div class="theme-card secret-theme-card" id="theme-card-retrointernet" data-theme="retrointernet" style="display:none">
+              <div class="theme-preview" style="background:#C0C0C0">
+                <div class="theme-prev-sidebar" style="background:#808080;border-right:2px solid #000080"></div>
+                <div class="theme-prev-content">
+                  <div class="theme-prev-bar" style="background:#000080"></div>
+                  <div class="theme-prev-bar" style="background:#FFF;width:60%;border:1px solid #808080"></div>
+                </div>
+              </div>
+              <div class="theme-name">Retro Internet <span style="font-size:0.7em;opacity:0.6">🔓</span></div>
+            </div>
+            <div class="theme-card secret-theme-card" id="theme-card-hitchhiker" data-theme="hitchhiker" style="display:none">
+              <div class="theme-preview" style="background:#0A0A1A">
+                <div class="theme-prev-sidebar" style="background:rgba(10,10,30,0.9);border-right:2px solid #FFD700"></div>
+                <div class="theme-prev-content">
+                  <div class="theme-prev-bar" style="background:#FFD700"></div>
+                  <div class="theme-prev-bar" style="background:#1A1A3A;width:60%"></div>
+                </div>
+              </div>
+              <div class="theme-name">Don't Panic <span style="font-size:0.7em;opacity:0.6">🔓</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GENERAL -->
+        <div class="settings-section-title">General</div>
+        <div class="settings-grid">
+          <div class="settings-card">
+            <div class="setting-row">
+              <label>Moneda</label>
+              <select id="setting-currency">
+                <option value="MXN">MXN — Peso mexicano</option>
+                <option value="USD">USD — Dólar</option>
+                <option value="EUR">EUR — Euro</option>
+              </select>
+            </div>
+            <div class="setting-row">
+              <label>Primer día de semana</label>
+              <select id="setting-week-start">
+                <option value="1">Lunes</option>
+                <option value="0">Domingo</option>
+              </select>
+            </div>
+          </div>
+          <div class="settings-card">
+            <div class="setting-row">
+              <label>Exportar datos</label>
+              <div class="export-btns">
+                <button class="btn-ghost btn-export-fmt" data-fmt="json">JSON</button>
+                <button class="btn-ghost btn-export-fmt" data-fmt="csv">CSV</button>
+                <button class="btn-ghost btn-export-fmt" data-fmt="xlsx">XLSX</button>
+                <button class="btn-ghost btn-export-fmt" data-fmt="ods">ODS</button>
+                <button class="btn-ghost btn-export-fmt" data-fmt="pdf">PDF</button>
+                <button class="btn-ghost btn-export-fmt" data-fmt="html">HTML</button>
+                <button class="btn-ghost btn-export-fmt" data-fmt="txt">TXT</button>
+                <button class="btn-ghost btn-export-fmt btn-xp-secret" id="btn-xp-secret" data-fmt="exe" title="sophron_setup.exe">EXE</button>
+              </div>
+            </div>
+            <div class="setting-row">
+              <label>Versión</label>
+              <span class="setting-value" id="version-secret" title="SOPHRON v3.0.0">SOPHRON v3.0.0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODO NEURODIVERSO -->
+        <div class="settings-section-title" style="margin-top:24px">Modo Neurodiverso</div>
+        <div class="settings-grid">
+          <div class="settings-card neuro-toggle-card">
+            <div class="setting-row">
+              <div>
+                <label style="font-weight:600">🧠 Modo Neurodiverso</label>
+                <div style="font-size:0.8em;color:var(--text3);margin-top:2px">Herramientas de apoyo para ADHD y autismo</div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="toggle-neuro">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div id="neuro-panel" class="neuro-panel" style="display:none">
+
+          <!-- Estado del día -->
+          <div class="neuro-section-title">¿Cómo llegas hoy?</div>
+          <div class="neuro-day-status-grid">
+            <button class="neuro-day-btn" data-level="1" title="Muy bajo — necesito ir despacio">🌱</button>
+            <button class="neuro-day-btn" data-level="2" title="Bajo — puedo lo esencial">🌤</button>
+            <button class="neuro-day-btn" data-level="3" title="Regular — día normal">⚡</button>
+            <button class="neuro-day-btn" data-level="4" title="Bien — puedo con más">🚀</button>
+            <button class="neuro-day-btn" data-level="5" title="Excelente — en modo flujo">🔥</button>
+          </div>
+          <div id="neuro-day-label" class="neuro-day-label">Selecciona tu nivel de energía de hoy</div>
+
+          <!-- Sobrecarga sensorial -->
+          <div class="neuro-section-title" style="margin-top:16px">Sobrecarga sensorial</div>
+          <div class="neuro-overload-wrap">
+            <input type="range" id="neuro-overload" min="1" max="5" value="1" class="neuro-slider">
+            <div class="neuro-overload-labels"><span>Tranquilo</span><span>Saturado</span></div>
+          </div>
+          <div id="neuro-overload-label" class="neuro-day-label">—</div>
+
+          <!-- Controles rápidos -->
+          <div class="neuro-section-title" style="margin-top:16px">Controles rápidos</div>
+          <div class="neuro-quick-grid">
+            <button class="neuro-quick-btn" id="btn-neuro-focus">
+              <span class="neuro-quick-icon">🎯</span><span>Hiperfoco</span>
+            </button>
+            <button class="neuro-quick-btn" id="btn-neuro-silence">
+              <span class="neuro-quick-icon">🔇</span><span>Silencio total</span>
+            </button>
+            <button class="neuro-quick-btn" id="btn-neuro-low">
+              <span class="neuro-quick-icon">🌙</span><span>Bajo estímulo</span>
+            </button>
+            <button class="neuro-quick-btn" id="btn-neuro-body">
+              <span class="neuro-quick-icon">👤</span><span>Body double</span>
+            </button>
+          </div>
+
+          <!-- Racha -->
+          <div class="neuro-section-title" style="margin-top:16px">Racha de productividad</div>
+          <div class="neuro-streak-wrap">
+            <div id="neuro-streak-flame" class="neuro-streak-flame">🔥</div>
+            <div>
+              <div id="neuro-streak-count" class="neuro-streak-count">0 días</div>
+              <div id="neuro-streak-sub" class="neuro-streak-sub">Completa al menos una tarea hoy para empezar tu racha</div>
+            </div>
+          </div>
+
+          <!-- Rutinas -->
+          <div class="neuro-section-title" style="margin-top:16px">Rutina del día</div>
+          <div id="neuro-routine-list" class="neuro-routine-list"></div>
+          <button class="btn-ghost" id="btn-neuro-add-routine" style="margin-top:8px;width:100%">+ Añadir bloque de rutina</button>
+
+        </div>
+
+        <!-- LOGROS SECRETOS -->
+        <div class="settings-section-title" style="margin-top:24px">Logros secretos</div>
+        <div id="secret-badges-grid" class="secret-badges-grid"></div>
+        <div style="margin-top:32px;text-align:right">
+          <button id="btn-reset-badges" style="background:none;border:none;color:var(--text3);font-size:0.65em;opacity:0.25;cursor:pointer;padding:4px 8px;transition:opacity 0.2s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.25'">⟳ reset badges</button>
+        </div>
+
+        <div class="settings-section">
+          <h3 class="settings-section-title">☁️ Sincronización con móvil</h3>
+          <p class="settings-hint" style="margin-bottom:12px;color:var(--text3);font-size:13px">
+            Conecta Sophron Desktop con la app móvil usando JSONBin.io (gratis).
+            <a href="https://jsonbin.io" target="_blank" style="color:var(--accent)">Crear cuenta →</a>
+          </p>
+
+          <div class="form-group">
+            <label class="form-label">API Key (Master Key)</label>
+            <input type="password" id="sync-api-key" class="form-input" placeholder="$2a$10$..." autocomplete="off">
+          </div>
+
+          <div class="form-group" style="margin-top:8px">
+            <label class="form-label">Bin ID</label>
+            <input type="text" id="sync-bin-id" class="form-input" placeholder="64abc123..." autocomplete="off">
+          </div>
+
+          <p id="sync-status" style="display:none;font-size:13px;margin:8px 0;font-weight:500"></p>
+
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+            <button id="btn-sync-create-bin" class="btn btn-secondary">✨ Crear Bin nuevo</button>
+            <button id="btn-sync-save-creds" class="btn btn-secondary">💾 Guardar credenciales</button>
+            <button id="btn-sync-pull" class="btn btn-secondary">⬇ Descargar nube</button>
+            <button id="btn-sync-push" class="btn btn-primary">⬆ Subir a nube</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BALANCE -->
+    <div class="view" id="view-balance">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Balance</h1>
+          <p class="view-subtitle">Equilibrio entre trabajo y bienestar</p>
+        </div>
+      </div>
+
+      <div class="balance-scroll">
+
+        <!-- TEMPORIZADOR -->
+        <div class="balance-section">
+          <div class="balance-section-title">Temporizador</div>
+          <div class="timer-card">
+            <div class="timer-mode-toggle">
+              <button class="timer-mode-btn active" id="timer-btn-work" data-mode="work">
+                <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                Trabajo
+              </button>
+              <button class="timer-mode-btn" id="timer-btn-rest" data-mode="rest">
+                <svg viewBox="0 0 24 24"><path d="M17 18a5 5 0 00-10 0"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/><line x1="23" y1="22" x2="1" y2="22"/><polyline points="8 6 12 2 16 6"/></svg>
+                Descanso
+              </button>
+            </div>
+
+            <div class="timer-display-wrap">
+              <svg class="timer-ring-svg" viewBox="0 0 200 200">
+                <circle class="timer-ring-bg" cx="100" cy="100" r="88"/>
+                <circle class="timer-ring-progress" id="timer-ring" cx="100" cy="100" r="88"/>
+              </svg>
+              <div class="timer-display-inner">
+                <div class="timer-label-mode" id="timer-label-mode">TRABAJO</div>
+                <div class="timer-time" id="timer-display">00:00</div>
+                <div class="timer-label-sub" id="timer-label-sub">sesión activa</div>
+              </div>
+            </div>
+
+            <div class="timer-controls">
+              <button class="btn-ghost" id="btn-timer-reset">↺ Reiniciar</button>
+              <button class="btn-primary timer-play-btn" id="btn-timer-toggle">▶ Iniciar</button>
+              <button class="btn-ghost" id="btn-timer-skip">Saltar →</button>
+            </div>
+
+            <div class="timer-stats-row">
+              <div class="timer-stat">
+                <div class="timer-stat-val" id="timer-sessions-today">0</div>
+                <div class="timer-stat-label">sesiones hoy</div>
+              </div>
+              <div class="timer-stat">
+                <div class="timer-stat-val" id="timer-work-today">0m</div>
+                <div class="timer-stat-label">tiempo trabajado</div>
+              </div>
+              <div class="timer-stat">
+                <div class="timer-stat-val" id="timer-rest-today">0m</div>
+                <div class="timer-stat-label">tiempo descansado</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WELLNESS -->
+        <div class="balance-section">
+          <div class="balance-section-title">Wellness</div>
+          <div class="wellness-grid">
+
+            <!-- RESPIRACIÓN -->
+            <div class="wellness-card">
+              <div class="wellness-card-title">🫁 Respiración guiada</div>
+              <div class="breath-container">
+                <div class="breath-circle" id="breath-circle">
+                  <span id="breath-label">Inhala</span>
+                </div>
+                <div class="breath-phase" id="breath-phase">Listo para comenzar</div>
+              </div>
+              <div class="breath-techniques">
+                <button class="breath-tech-btn active" data-tech="box">Box 4-4-4-4</button>
+                <button class="breath-tech-btn" data-tech="478">4-7-8</button>
+                <button class="breath-tech-btn" data-tech="calm">Calma 5-5</button>
+              </div>
+              <button class="btn-primary" id="btn-breath-toggle" style="width:100%;margin-top:8px">▶ Comenzar</button>
+            </div>
+
+            <!-- MOOD TRACKER -->
+            <div class="wellness-card">
+              <div class="wellness-card-title">💭 Estado de ánimo</div>
+              <div class="mood-question">¿Cómo te sientes ahora?</div>
+              <div class="mood-selector">
+                <button class="mood-btn" data-mood="1" title="Mal">😔</button>
+                <button class="mood-btn" data-mood="2" title="Regular">😐</button>
+                <button class="mood-btn" data-mood="3" title="Bien">🙂</button>
+                <button class="mood-btn" data-mood="4" title="Muy bien">😊</button>
+                <button class="mood-btn" data-mood="5" title="Excelente">🤩</button>
+              </div>
+              <div class="mood-selected-label" id="mood-selected-label">Sin registrar hoy</div>
+              <div class="mood-chart-wrap">
+                <canvas id="mood-chart" height="60"></canvas>
+              </div>
+              <div class="mood-chart-label">Últimos 7 días</div>
+            </div>
+
+            <!-- GRATITUD -->
+            <div class="wellness-card wellness-card-wide">
+              <div class="wellness-card-title">🙏 Lista de gratitud</div>
+              <div class="gratitude-today">
+                <div class="gratitude-date-label" id="gratitude-date-label">Hoy no has registrado nada aún</div>
+                <div class="gratitude-inputs" id="gratitude-inputs">
+                  <div class="gratitude-input-row">
+                    <span class="gratitude-num">1.</span>
+                    <input type="text" class="gratitude-input" placeholder="Algo por lo que estás agradecido..." data-idx="0">
+                  </div>
+                  <div class="gratitude-input-row">
+                    <span class="gratitude-num">2.</span>
+                    <input type="text" class="gratitude-input" placeholder="Algo por lo que estás agradecido..." data-idx="1">
+                  </div>
+                  <div class="gratitude-input-row">
+                    <span class="gratitude-num">3.</span>
+                    <input type="text" class="gratitude-input" placeholder="Algo por lo que estás agradecido..." data-idx="2">
+                  </div>
+                </div>
+                <button class="btn-primary" id="btn-save-gratitude" style="width:100%;margin-top:8px">Guardar gratitud del día</button>
+              </div>
+              <div class="gratitude-history" id="gratitude-history"></div>
+            </div>
+
+            <!-- MANTRAS -->
+            <div class="wellness-card">
+              <div class="wellness-card-title">✨ Mantras</div>
+              <div class="mantra-display" id="mantra-display">
+                <div class="mantra-text" id="mantra-text">Agrega tu primer mantra</div>
+              </div>
+              <div class="mantra-nav">
+                <button class="btn-ghost" id="btn-mantra-prev">‹</button>
+                <span id="mantra-counter" style="font-size:12px;color:var(--text3)">0 / 0</span>
+                <button class="btn-ghost" id="btn-mantra-next">›</button>
+              </div>
+              <div class="mantra-add-row">
+                <input type="text" id="mantra-input" placeholder="Nuevo mantra...">
+                <button class="btn-primary" id="btn-mantra-add">+</button>
+              </div>
+              <div class="mantra-list" id="mantra-list"></div>
+            </div>
+
+            <!-- PENSAMIENTOS -->
+            <div class="wellness-card">
+              <div class="wellness-card-title">📝 Pensamientos</div>
+              <div class="thought-date" id="thought-date"></div>
+              <textarea class="thought-textarea" id="thought-textarea" placeholder="Escribe libremente... ¿qué tienes en mente hoy?"></textarea>
+              <div class="thought-actions">
+                <button class="btn-primary" id="btn-save-thought">Guardar</button>
+                <button class="btn-ghost" id="btn-thought-history">Historial</button>
+              </div>
+              <div class="thought-history-list" id="thought-history-list" style="display:none"></div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- MODO ENFOQUE -->
+        <div class="balance-section">
+          <div class="balance-section-title">Modo Enfoque</div>
+          <div class="focus-card">
+            <div class="focus-info">
+              <div class="focus-icon">🎯</div>
+              <div class="focus-text">
+                <div class="focus-title">Sesión de enfoque profundo</div>
+                <div class="focus-desc">Elimina distracciones y concentra toda tu energía en una sola tarea</div>
+              </div>
+            </div>
+            <div class="focus-config">
+              <div class="focus-task-sel" style="font-size:13px;color:var(--text2)">Selecciona la tarea dentro del modo enfoque</div>
+              <button class="btn-primary focus-start-btn" id="btn-focus-mode">🚀 Iniciar modo enfoque</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- JUEGOS DE DESESTRES -->
+        <div class="balance-section">
+          <div class="balance-section-title">🎮 Juegos de desestres</div>
+          <div class="games-grid">
+
+            <!-- BURBUJAS -->
+            <div class="wellness-card game-card">
+              <div class="game-card-header">
+                <div class="game-card-title">🫧 Reventar burbujas</div>
+                <div class="game-card-score">Reventadas: <span id="bubble-score">0</span></div>
+              </div>
+              <div class="game-card-desc">Haz click en las burbujas antes de que escapen. ¡Relájate!</div>
+              <div class="bubble-arena" id="bubble-arena"></div>
+              <div class="game-card-controls">
+                <button class="btn-ghost" id="btn-bubble-toggle">▶ Iniciar</button>
+                <button class="btn-ghost" id="btn-bubble-reset">↺ Reiniciar</button>
+              </div>
+            </div>
+
+            <!-- MANDALA -->
+            <div class="wellness-card game-card mandala-card">
+              <div class="game-card-header">
+                <div class="game-card-title">🎨 Mándala zen</div>
+                <div class="game-card-actions">
+                  <button class="btn-ghost btn-sm" id="btn-mandala-clear">Limpiar</button>
+                  <button class="btn-ghost btn-sm" id="btn-mandala-new">Nuevo</button>
+                </div>
+              </div>
+              <div class="game-card-desc">Elige un color y haz click en las celdas para colorear</div>
+              <div class="mandala-palette" id="mandala-palette"></div>
+              <div class="mandala-wrap">
+                <canvas id="mandala-canvas" width="340" height="340"></canvas>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- METAS / OKRs -->
+    <div class="view" id="view-goals">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Metas</h1>
+          <p class="view-subtitle">Objetivos y resultados clave (OKRs)</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn-primary" id="btn-add-objective">+ Nuevo objetivo</button>
+        </div>
+      </div>
+      <div class="goals-list" id="goals-list">
+        <div class="goals-stats" id="goals-stats"></div>
+        <div class="objectives-list" id="objectives-list">
+          <div class="bento-empty" style="text-align:center;padding:60px;color:var(--text2)">No hay objetivos. ¡Define el primero y empieza a alcanzarlo!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTAS RÁPIDAS -->
+    <div class="view" id="view-notes">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Notas</h1>
+          <p class="view-subtitle">Ideas, recordatorios y apuntes rápidos · <span id="notes-count-label">0 notas</span></p>
+        </div>
+        <div class="header-actions">
+          <div class="notes-filter-wrap">
+            <button class="notes-filter-btn active" data-notes-filter="all">Todas</button>
+            <button class="notes-filter-btn" data-notes-filter="pinned">📌 Fijadas</button>
+          </div>
+          <input type="text" id="notes-search" placeholder="Buscar notas..." style="width:180px">
+          <button class="btn-ghost" id="btn-notes-view-toggle" title="Cambiar vista">⊞</button>
+          <button class="btn-primary" id="btn-add-note">+ Nueva nota</button>
+        </div>
+      </div>
+      <div class="notes-grid" id="notes-grid">
+        <div class="empty-state">No hay notas aún. ¡Crea la primera!</div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-overlay">
+
+  <!-- Modal: Bloque de rutina -->
+  <div class="modal" id="modal-neuro-routine" style="max-width:360px">
+    <div class="modal-header">
+      <h3>Nuevo bloque de rutina</h3>
+      <button class="modal-close" onclick="closeModal('neuro-routine')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="routine-id">
+      <div class="form-group">
+        <label>Nombre del bloque</label>
+        <input type="text" id="routine-name" placeholder="Ej: Mañana, Trabajo profundo, Descanso...">
+      </div>
+      <div class="form-group">
+        <label>Hora de inicio</label>
+        <input type="time" id="routine-time">
+      </div>
+      <div class="form-group">
+        <label>Duración (minutos)</label>
+        <input type="number" id="routine-duration" min="5" max="240" value="30">
+      </div>
+      <div class="form-group">
+        <label>Color</label>
+        <div class="neuro-color-opts">
+          <button class="neuro-color-opt active" data-color="#3B82F6" style="background:#3B82F6"></button>
+          <button class="neuro-color-opt" data-color="#10B981" style="background:#10B981"></button>
+          <button class="neuro-color-opt" data-color="#F59E0B" style="background:#F59E0B"></button>
+          <button class="neuro-color-opt" data-color="#EF4444" style="background:#EF4444"></button>
+          <button class="neuro-color-opt" data-color="#8B5CF6" style="background:#8B5CF6"></button>
+          <button class="neuro-color-opt" data-color="#EC4899" style="background:#EC4899"></button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" onclick="closeModal('neuro-routine')">Cancelar</button>
+      <button class="btn-primary" id="btn-save-routine">Guardar</button>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-task">
+    <div class="modal-header">
+      <h2 id="modal-task-title">Nueva tarea</h2>
+      <button class="modal-close" data-close="modal-task">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="task-id">
+      <div class="form-row">
+        <label>Título</label>
+        <input type="text" id="task-title" placeholder="¿Qué necesitas hacer?">
+      </div>
+      <div class="form-row">
+        <label>Descripción</label>
+        <textarea id="task-desc" placeholder="Detalles opcionales..." rows="3"></textarea>
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Prioridad</label>
+          <select id="task-priority">
+            <option value="low">Baja</option>
+            <option value="medium" selected>Media</option>
+            <option value="high">Alta</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Categoría</label>
+          <select id="task-category">
+            <option value="work">Trabajo</option>
+            <option value="personal">Personal</option>
+            <option value="health">Salud</option>
+            <option value="finance">Finanzas</option>
+            <option value="other">Otro</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Fecha límite</label>
+          <input type="date" id="task-due">
+        </div>
+        <div class="form-row">
+          <label>Tiempo estimado</label>
+          <div style="display:flex;gap:6px">
+            <input type="number" id="task-est-h" placeholder="h" min="0" max="24" style="width:70px">
+            <input type="number" id="task-est-m" placeholder="min" min="0" max="59" style="width:70px">
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Repetición</label>
+        <select id="task-recur">
+          <option value="none">Sin repetición</option>
+          <option value="daily">Diaria</option>
+          <option value="weekly">Semanal</option>
+          <option value="monthly">Mensual</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" data-close="modal-task">Cancelar</button>
+      <button class="btn-primary" id="btn-save-task">Guardar</button>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-event">
+    <div class="modal-header">
+      <h2 id="modal-event-title">Nuevo evento</h2>
+      <button class="modal-close" data-close="modal-event">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="event-id">
+      <div class="form-row">
+        <label>Título</label>
+        <input type="text" id="event-title" placeholder="Nombre del evento">
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Fecha</label>
+          <input type="date" id="event-date">
+        </div>
+        <div class="form-row">
+          <label>Hora</label>
+          <input type="time" id="event-time">
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Color</label>
+        <div class="color-picker">
+          <button class="color-opt active" data-color="#3B82F6" style="background:#3B82F6"></button>
+          <button class="color-opt" data-color="#10B981" style="background:#10B981"></button>
+          <button class="color-opt" data-color="#F59E0B" style="background:#F59E0B"></button>
+          <button class="color-opt" data-color="#EF4444" style="background:#EF4444"></button>
+          <button class="color-opt" data-color="#8B5CF6" style="background:#8B5CF6"></button>
+          <button class="color-opt" data-color="#EC4899" style="background:#EC4899"></button>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Notas</label>
+        <textarea id="event-notes" placeholder="Notas opcionales..." rows="2"></textarea>
+      </div>
+      <div class="form-row" style="margin-top:4px">
+        <label>💰 Costo <span style="font-size:11px;color:var(--text3)">(opcional)</span></label>
+        <div class="form-grid" style="margin:0;gap:8px">
+          <input type="number" id="event-cost" placeholder="0.00" min="0" step="0.01">
+          <select id="event-cost-category">
+            <option value="entertainment">Entretenimiento</option>
+            <option value="food">Alimentación</option>
+            <option value="transport">Transporte</option>
+            <option value="health">Salud</option>
+            <option value="work">Trabajo</option>
+            <option value="services">Servicios</option>
+            <option value="other">Otro</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row" id="event-cost-auto-row" style="display:none;margin-top:-4px">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:400">
+          <input type="checkbox" id="event-cost-auto">
+          Registrar automáticamente como gasto
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" data-close="modal-event">Cancelar</button>
+      <button class="btn-primary" id="btn-save-event">Guardar</button>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-expense">
+    <div class="modal-header">
+      <h2 class="modal-title">Registrar movimiento</h2>
+      <button class="modal-close" data-close="modal-expense">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="expense-id">
+      <div class="form-row">
+        <label>Tipo</label>
+        <div class="type-toggle">
+          <button class="type-btn active" data-type="expense">Egreso</button>
+          <button class="type-btn" data-type="income">Ingreso</button>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Concepto</label>
+        <input type="text" id="expense-concept" placeholder="¿En qué?">
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Monto</label>
+          <input type="number" id="expense-amount" placeholder="0.00" min="0" step="0.01">
+        </div>
+        <div class="form-row">
+          <label>Fecha</label>
+          <input type="date" id="expense-date">
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Categoría</label>
+        <select id="expense-category">
+          <option value="food">Alimentación</option>
+          <option value="transport">Transporte</option>
+          <option value="health">Salud</option>
+          <option value="entertainment">Entretenimiento</option>
+          <option value="work">Trabajo</option>
+          <option value="services">Servicios</option>
+          <option value="other">Otro</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" data-close="modal-expense">Cancelar</button>
+      <button class="btn-primary" id="btn-save-expense">Guardar</button>
+    </div>
+  </div>
+
+  <!-- CUSTOM THEME BUILDER -->
+  <div class="modal modal-wide" id="modal-custom-theme">
+    <div class="modal-header">
+      <h2>Constructor de tema</h2>
+      <button class="modal-close" data-close="modal-custom-theme">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="custom-theme-layout">
+        <div class="custom-theme-left">
+          <div class="form-row">
+            <label>Nombre del tema</label>
+            <input type="text" id="custom-theme-name" placeholder="Mi tema">
+          </div>
+          <div class="form-row">
+            <label>Imagen de fondo</label>
+            <div class="custom-img-zone" id="custom-img-zone">
+              <span id="custom-img-label">Sin imagen — clic para agregar</span>
+            </div>
+            <button class="btn-ghost" id="btn-custom-img" style="margin-top:6px">Seleccionar imagen</button>
+          </div>
+          <div class="color-grid">
+            <div class="form-row">
+              <label>Color de fondo</label>
+              <div class="color-input-wrap">
+                <input type="color" id="ct-bg" value="#F8F9FA">
+                <input type="text" id="ct-bg-hex" value="#F8F9FA" maxlength="7">
+              </div>
+            </div>
+            <div class="form-row">
+              <label>Superficie / Cards</label>
+              <div class="color-input-wrap">
+                <input type="color" id="ct-surface" value="#FFFFFF">
+                <input type="text" id="ct-surface-hex" value="#FFFFFF" maxlength="7">
+              </div>
+            </div>
+            <div class="form-row">
+              <label>Color acento</label>
+              <div class="color-input-wrap">
+                <input type="color" id="ct-accent" value="#206BC4">
+                <input type="text" id="ct-accent-hex" value="#206BC4" maxlength="7">
+              </div>
+            </div>
+            <div class="form-row">
+              <label>Texto principal</label>
+              <div class="color-input-wrap">
+                <input type="color" id="ct-text" value="#212529">
+                <input type="text" id="ct-text-hex" value="#212529" maxlength="7">
+              </div>
+            </div>
+            <div class="form-row">
+              <label>Texto secundario</label>
+              <div class="color-input-wrap">
+                <input type="color" id="ct-text2" value="#495057">
+                <input type="text" id="ct-text2-hex" value="#495057" maxlength="7">
+              </div>
+            </div>
+            <div class="form-row">
+              <label>Borde</label>
+              <div class="color-input-wrap">
+                <input type="color" id="ct-border" value="#E9ECEF">
+                <input type="text" id="ct-border-hex" value="#E9ECEF" maxlength="7">
+              </div>
+            </div>
+            <div class="form-row">
+              <label>Sidebar</label>
+              <div class="color-input-wrap">
+                <input type="color" id="ct-sidebar" value="#FFFFFF">
+                <input type="text" id="ct-sidebar-hex" value="#FFFFFF" maxlength="7">
+              </div>
+            </div>
+            <div class="form-row">
+              <label>Titlebar</label>
+              <div class="color-input-wrap">
+                <input type="color" id="ct-titlebar" value="#FFFFFF">
+                <input type="text" id="ct-titlebar-hex" value="#FFFFFF" maxlength="7">
+              </div>
+            </div>
+          </div>
+
+          <div class="opacity-controls">
+            <div class="form-row">
+              <label>Opacidad sidebar <span id="ct-sidebar-opacity-val">100%</span></label>
+              <input type="range" id="ct-sidebar-opacity" min="0" max="100" value="100">
+            </div>
+            <div class="form-row">
+              <label>Opacidad cards <span id="ct-card-opacity-val">100%</span></label>
+              <input type="range" id="ct-card-opacity" min="0" max="100" value="100">
+            </div>
+            <div class="form-row">
+              <label>Opacidad titlebar <span id="ct-titlebar-opacity-val">100%</span></label>
+              <input type="range" id="ct-titlebar-opacity" min="0" max="100" value="100">
+            </div>
+          </div>
+
+          <!-- EFECTO NEÓN -->
+          <div class="neon-section">
+            <div class="neon-section-title">
+              <span>Efecto neón en logo</span>
+              <label class="toggle-switch">
+                <input type="checkbox" id="ct-neon-enabled">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="neon-controls" id="neon-controls">
+              <div class="color-grid">
+                <div class="form-row">
+                  <label>Color neón 1</label>
+                  <div class="color-input-wrap">
+                    <input type="color" id="ct-neon1" value="#39FF14">
+                    <input type="text" id="ct-neon1-hex" value="#39FF14" maxlength="7">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <label>Color neón 2</label>
+                  <div class="color-input-wrap">
+                    <input type="color" id="ct-neon2" value="#00BFFF">
+                    <input type="text" id="ct-neon2-hex" value="#00BFFF" maxlength="7">
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <label>Intensidad <span id="ct-neon-blur-val">10px</span></label>
+                <input type="range" id="ct-neon-blur" min="4" max="40" value="10">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="custom-theme-right">
+          <div class="form-row"><label>Vista previa</label></div>
+          <div class="custom-preview-window" id="custom-preview-window">
+            <div class="cpw-titlebar" id="cpw-titlebar"></div>
+            <div class="cpw-body">
+              <div class="cpw-sidebar" id="cpw-sidebar">
+                <div class="cpw-logo" id="cpw-logo">SOPHRON</div>
+                <div class="cpw-nav-item cpw-active" id="cpw-nav-active"></div>
+                <div class="cpw-nav-item" id="cpw-nav1"></div>
+                <div class="cpw-nav-item" id="cpw-nav2"></div>
+              </div>
+              <div class="cpw-main" id="cpw-main">
+                <div class="cpw-cards-area">
+                  <div class="cpw-card" id="cpw-card1"></div>
+                  <div class="cpw-card" id="cpw-card2"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="neon-preview-label" id="neon-preview-label" style="display:none">✨ Neón activo</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" data-close="modal-custom-theme">Cancelar</button>
+      <button class="btn-primary" id="btn-save-custom-theme">Guardar tema</button>
+    </div>
+  </div>
+
+  <!-- COTIZADOR MODAL -->
+  <div class="modal modal-wide" id="modal-cotizador">
+    <div class="modal-header">
+      <h2>🛒 Cotizador de compras</h2>
+      <button class="modal-close" data-close="modal-cotizador">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="cotizador-layout">
+
+        <!-- IZQUIERDA: lista de artículos -->
+        <div class="cotizador-left">
+          <div class="cotizador-add-row">
+            <input type="text" id="cot-item-name" placeholder="Nombre del artículo">
+            <input type="number" id="cot-item-price" placeholder="Precio" min="0" step="0.01">
+            <input type="number" id="cot-item-qty" placeholder="Qty" min="1" value="1" style="width:70px">
+            <button class="btn-primary" id="btn-cot-add">Agregar</button>
+          </div>
+          <div class="cotizador-list" id="cot-list">
+            <div class="bento-empty" id="cot-empty">Sin artículos — agrega algo arriba</div>
+          </div>
+          <div class="cotizador-total-row">
+            <span>Total cotizado:</span>
+            <span class="cot-total" id="cot-total">$0</span>
+          </div>
+
+          <!-- Separador MSI -->
+          <div class="cot-msi-section">
+            <div class="cot-msi-toggle-row">
+              <span class="cot-msi-title">💳 Meses sin intereses (MSI)</span>
+              <label class="toggle-switch">
+                <input type="checkbox" id="cot-msi-enabled">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+
+            <div class="cot-msi-fields" id="cot-msi-fields">
+              <div class="form-row">
+                <label>Meses</label>
+                <select id="cot-msi-months">
+                  <option value="3">3 meses</option>
+                  <option value="6" selected>6 meses</option>
+                  <option value="9">9 meses</option>
+                  <option value="12">12 meses</option>
+                  <option value="18">18 meses</option>
+                  <option value="24">24 meses</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label>Tasa anual % <span style="font-size:11px;color:var(--text3)">(opcional)</span></label>
+                <input type="number" id="cot-msi-rate" placeholder="0 = sin interés" min="0" max="200" step="0.1" value="0">
+              </div>
+
+              <!-- Resultado MSI -->
+              <div class="cot-msi-result" id="cot-msi-result">
+                <div class="cot-msi-row">
+                  <span>Precio total</span>
+                  <span id="msi-precio-total">—</span>
+                </div>
+                <div class="cot-msi-row" id="msi-row-interes">
+                  <span>Total con interés</span>
+                  <span id="msi-total-interes">—</span>
+                </div>
+                <div class="cot-msi-row highlight">
+                  <span>Pago mensual</span>
+                  <span id="msi-pago-mensual">—</span>
+                </div>
+                <div class="cot-msi-row">
+                  <span>Pago quincenal</span>
+                  <span id="msi-pago-quincenal">—</span>
+                </div>
+                <div class="cot-msi-row muted">
+                  <span>Interés total pagado</span>
+                  <span id="msi-interes-pagado">—</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-ghost" style="width:100%;margin-top:8px" id="btn-cot-clear">Limpiar lista</button>
+        </div>
+
+        <!-- DERECHA: análisis + MSI -->
+        <div class="cotizador-right">
+
+          <!-- Semáforo de balance -->
+          <div class="cot-impact-card">
+            <div class="cot-impact-label">Balance actual</div>
+            <div class="cot-impact-value" id="cot-balance-now">$0</div>
+          </div>
+          <div class="cot-impact-arrow">↓ si compras todo</div>
+          <div class="cot-impact-card" id="cot-result-card">
+            <div class="cot-impact-label">Balance proyectado</div>
+            <div class="cot-impact-value" id="cot-balance-after">$0</div>
+          </div>
+          <div class="cot-semaforo" id="cot-semaforo">
+            <div class="cot-sem-dot" id="cot-sem-green"></div>
+            <div class="cot-sem-dot" id="cot-sem-yellow"></div>
+            <div class="cot-sem-dot" id="cot-sem-red"></div>
+          </div>
+          <div class="cot-verdict" id="cot-verdict">Agrega artículos para analizar</div>
+
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" data-close="modal-cotizador">Cerrar</button>
+      <button class="btn-primary" id="btn-cot-register">Registrar como gastos</button>
+    </div>
+  </div>
+
+  <!-- TIMER ALERT MODAL -->
+  <div class="modal modal-alert" id="modal-timer-alert">
+    <div class="timer-alert-icon" id="timer-alert-icon">⏰</div>
+    <h2 id="timer-alert-title">¡Llevas mucho tiempo trabajando!</h2>
+    <p id="timer-alert-msg">Has trabajado más de 90 minutos. Tu mente necesita un descanso para rendir mejor.</p>
+    <div class="modal-footer" style="justify-content:center;gap:12px;padding-top:0">
+      <button class="btn-ghost" id="btn-alert-dismiss">Continuar trabajando</button>
+      <button class="btn-primary" id="btn-alert-rest">☕ Iniciar descanso</button>
+    </div>
+  </div>
+
+  <!-- MODAL: Budget -->
+  <div class="modal" id="modal-budget">
+    <div class="modal-header">
+      <h2>Presupuesto por categoría</h2>
+      <button class="modal-close" data-close="modal-budget">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="budget-id">
+      <div class="form-row">
+        <label>Categoría</label>
+        <select id="budget-category">
+          <option value="food">🍽 Alimentación</option>
+          <option value="transport">🚗 Transporte</option>
+          <option value="housing">🏠 Vivienda</option>
+          <option value="health">💊 Salud</option>
+          <option value="entertainment">🎮 Entretenimiento</option>
+          <option value="clothing">👕 Ropa</option>
+          <option value="education">📚 Educación</option>
+          <option value="work">💼 Trabajo</option>
+          <option value="other">📦 Otro</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Límite mensual</label>
+        <input type="number" id="budget-limit" placeholder="0.00" min="0" step="0.01">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" data-close="modal-budget">Cancelar</button>
+      <button class="btn-primary" id="btn-save-budget">Guardar</button>
+    </div>
+  </div>
+
+  <!-- MODAL: Saving Goal -->
+  <div class="modal" id="modal-saving">
+    <div class="modal-header">
+      <h2 id="modal-saving-title">Nueva meta de ahorro</h2>
+      <button class="modal-close" data-close="modal-saving">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="saving-id">
+      <div class="form-row"><label>Nombre de la meta</label><input type="text" id="saving-name" placeholder="Ej: Vacaciones, Fondo de emergencia..."></div>
+      <div class="form-grid">
+        <div class="form-row"><label>Monto objetivo</label><input type="number" id="saving-target" placeholder="0.00" min="0" step="0.01"></div>
+        <div class="form-row"><label>Ahorrado hasta ahora</label><input type="number" id="saving-current" placeholder="0.00" min="0" step="0.01"></div>
+      </div>
+      <div class="form-grid">
+        <div class="form-row"><label>Fecha objetivo</label><input type="date" id="saving-date"></div>
+        <div class="form-row"><label>Emoji</label><input type="text" id="saving-emoji" value="🎯" maxlength="2" style="width:60px"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" data-close="modal-saving">Cancelar</button>
+      <button class="btn-primary" id="btn-save-saving">Guardar</button>
+    </div>
+  </div>
+
+  <!-- MODAL: Saving Deposit -->
+  <div class="modal" id="modal-saving-deposit">
+    <div class="modal-header">
+      <h2>Registrar aportación</h2>
+      <button class="modal-close" data-close="modal-saving-deposit">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="deposit-saving-id">
+      <div class="deposit-label" id="deposit-label" style="margin-bottom:12px;color:var(--text2)"></div>
+      <div class="form-row"><label>Monto a depositar</label><input type="number" id="deposit-amount" placeholder="0.00" min="0" step="0.01"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" data-close="modal-saving-deposit">Cancelar</button>
+      <button class="btn-primary" id="btn-confirm-deposit">Confirmar</button>
+    </div>
+  </div>
+
+  <!-- MODAL: Recurrent -->
+  <div class="modal" id="modal-recurrent">
+    <div class="modal-header">
+      <h2 id="modal-recurrent-title">Nueva transacción recurrente</h2>
+      <button class="modal-close" data-close="modal-recurrent">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="recurrent-id">
+      <div class="form-row"><label>Concepto</label><input type="text" id="recurrent-concept" placeholder="Ej: Renta, Spotify, Salario..."></div>
+      <div class="form-grid">
+        <div class="form-row"><label>Monto</label><input type="number" id="recurrent-amount" placeholder="0.00" min="0" step="0.01"></div>
+        <div class="form-row">
+          <label>Tipo</label>
+          <select id="recurrent-type">
+            <option value="expense">Egreso</option>
+            <option value="income">Ingreso</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Categoría</label>
+          <select id="recurrent-category">
+            <option value="food">Alimentación</option>
+            <option value="transport">Transporte</option>
+            <option value="health">Salud</option>
+            <option value="entertainment">Entretenimiento</option>
+            <option value="work">Trabajo</option>
+            <option value="services">Servicios</option>
+            <option value="other">Otro</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Frecuencia</label>
+          <select id="recurrent-freq">
+            <option value="daily">Diaria</option>
+            <option value="weekly">Semanal</option>
+            <option value="biweekly">Quincenal</option>
+            <option value="monthly" selected>Mensual</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row"><label>Día del mes</label><input type="number" id="recurrent-day" min="1" max="31" value="1"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" data-close="modal-recurrent">Cancelar</button>
+      <button class="btn-primary" id="btn-save-recurrent">Guardar</button>
+    </div>
+  </div>
+
+  <!-- MODAL: Objective (OKR) -->
+  <div class="modal" id="modal-objective">
+    <div class="modal-header">
+      <h2 id="modal-obj-title">Nuevo objetivo</h2>
+      <button class="modal-close" data-close="modal-objective">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="obj-id">
+      <div class="form-row"><label>Objetivo</label><input type="text" id="obj-title-input" placeholder="¿Qué quieres lograr?"></div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Categoría</label>
+          <select id="obj-category">
+            <option value="work">Trabajo</option>
+            <option value="personal">Personal</option>
+            <option value="health">Salud</option>
+            <option value="finance">Finanzas</option>
+            <option value="learning">Aprendizaje</option>
+            <option value="other">Otro</option>
+          </select>
+        </div>
+        <div class="form-row"><label>Fecha límite</label><input type="date" id="obj-due"></div>
+      </div>
+      <div class="form-row">
+        <label>Resultados clave (uno por línea)</label>
+        <textarea id="obj-krs" placeholder="Completar 5 cursos&#10;Leer 3 libros&#10;Obtener certificación..." rows="4"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" data-close="modal-objective">Cancelar</button>
+      <button class="btn-primary" id="btn-save-objective">Guardar</button>
+    </div>
+  </div>
+
+  <!-- MODAL: Note -->
+  <div class="modal" id="modal-note">
+    <div class="modal-header">
+      <h2 id="modal-note-title">Nueva nota</h2>
+      <button class="modal-close" data-close="modal-note">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="note-id">
+      <div class="form-row"><label>Título (opcional)</label><input type="text" id="note-title" placeholder="Sin título"></div>
+      <div class="form-row"><label>Contenido</label><textarea id="note-body" placeholder="Escribe aquí..." rows="6"></textarea></div>
+      <div class="form-row">
+        <label>Color</label>
+        <div class="note-color-picker" id="note-color-picker">
+          <button class="note-cp-btn active" data-color="none" style="background:var(--card);border:2px solid var(--border)">⬜</button>
+          <button class="note-cp-btn" data-color="#FEF3C7" style="background:#FEF3C7"></button>
+          <button class="note-cp-btn" data-color="#D1FAE5" style="background:#D1FAE5"></button>
+          <button class="note-cp-btn" data-color="#DBEAFE" style="background:#DBEAFE"></button>
+          <button class="note-cp-btn" data-color="#EDE9FE" style="background:#EDE9FE"></button>
+          <button class="note-cp-btn" data-color="#FCE7F3" style="background:#FCE7F3"></button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" data-close="modal-note">Cancelar</button>
+      <button class="btn-primary" id="btn-save-note">Guardar</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOCUS MODE OVERLAY -->
+<div class="focus-overlay" id="focus-overlay">
+  <button class="focus-exit" id="focus-exit">✕ Salir</button>
+  <div class="focus-content">
+    <div class="focus-task-label">Modo Enfoque</div>
+    <div class="focus-task-title" id="focus-task-title">—</div>
+    <div class="focus-timer-display" id="focus-timer-display">25:00</div>
+    <div class="focus-timer-controls">
+      <button class="focus-btn" id="focus-reset" title="Reiniciar">↺</button>
+      <button class="focus-btn" id="focus-play">▶</button>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;max-width:320px">
+      <label style="font-size:13px;color:var(--text2)">Cambiar tarea:</label>
+      <select id="focus-task-select" style="width:100%">
+        <option value="">— Sin tarea seleccionada —</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+  <!-- UPSIDE DOWN FOG -->
+  <div class="ud-fog" id="ud-fog">
+    <div class="fog-layer fog-top"></div>
+    <div class="fog-layer fog-1"></div>
+    <div class="fog-layer fog-2"></div>
+    <div class="fog-layer fog-3"></div>
+    <div class="fog-particles" id="fog-particles"></div>
+  </div>
+
+  <!-- ST NOTIFICATION -->
+  <div class="st-notification" id="st-notification">
+    <div class="st-notif-icon">🔴</div>
+    <div class="st-notif-text">
+      <div class="st-notif-title">Modo Stranger Things activado</div>
+      <div class="st-notif-sub">Bienvenido al Upside Down</div>
+    </div>
+  </div>
+
+  <!-- RICK & MORTY OVERLAY -->
+
+  <!-- Portal vórtice (esquina) -->
+  <div class="rm-portal" id="rm-portal">
+    <div class="rm-portal-glow"></div>
+    <div class="rm-portal-ring rm-portal-ring-outer"></div>
+    <div class="rm-portal-ring rm-portal-ring-mid"></div>
+    <div class="rm-portal-img-wrap" id="rm-portal-img-wrap">
+      <img class="rm-portal-img" id="rm-portal-img" src="" alt="portal" style="background:transparent" draggable="false">
+    </div>
+  </div>
+
+  <!-- Partículas verdes -->
+  <div class="rm-particles" id="rm-particles"></div>
+
+  <!-- Portal gun cursor trail -->
+  <canvas class="rm-cursor-trail" id="rm-cursor-trail"></canvas>
+
+  <!-- Notificación Rick/Morty -->
+  <div class="rm-notification" id="rm-notification">
+    <div class="rm-notif-avatar-wrap" id="rm-notif-avatar-wrap">
+      <img class="rm-notif-avatar-img" id="rm-notif-avatar-img" src="" alt="">
+      <div class="rm-notif-avatar-fallback" id="rm-notif-avatar-fallback">R</div>
+    </div>
+    <div class="rm-notif-body">
+      <div class="rm-notif-name" id="rm-notif-name">Rick</div>
+      <div class="rm-notif-text" id="rm-notif-text">Wubba Lubba Dub Dub!</div>
+    </div>
+    <button class="rm-notif-close" id="rm-notif-close">✕</button>
+  </div>
+
+  <!-- Intro notification -->
+  <div class="rm-intro" id="rm-intro">
+    <div class="rm-intro-portal"></div>
+    <div class="rm-intro-text">
+      <div class="rm-intro-title">⚡ Modo Rick &amp; Morty activado</div>
+      <div class="rm-intro-sub">Bienvenido a la Dimensión C-137, <em>Morty</em></div>
+    </div>
+  </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- ⭐ STAR WARS: canvas de estrellas y cursor -->
+<canvas id="sw-starfield"></canvas>
+<canvas id="sw-cursor-trail"></canvas>
+
+<!-- 🔴 SITH: partículas y niebla -->
+<div id="sith-particles" style="position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;"></div>
+<div id="sith-fog"       style="position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;"></div>
+
+<!-- ⛏️ MINECRAFT: HUD (vida / hambre / XP) -->
+<div id="mc-hud">
+  <div id="mc-hud-bars">
+    <div class="mc-hearts" id="mc-hearts"></div>
+    <div class="mc-hunger" id="mc-hunger"></div>
+  </div>
+  <div id="mc-xp-bar"><div id="mc-xp-fill" style="width:0%"></div></div>
+  <div id="mc-xp-label">XP: 0</div>
+</div>
+
+<!-- ⛏️ MINECRAFT: Hotbar de navegación -->
+<div id="mc-hotbar"></div>
+<div id="mc-hotbar-selector"></div>
+
+<!-- ⛏️ MINECRAFT: Notificación de bioma -->
+<div id="mc-notification"></div>
+
+<!-- ⛏️ MINECRAFT: Achievement banner -->
+<div id="mc-achievement">
+  <div id="mc-achievement-icon">🏆</div>
+  <div id="mc-achievement-text">
+    <div id="mc-achievement-header">Achievement Get!</div>
+    <div id="mc-achievement-name">—</div>
+  </div>
+</div>
+
+<!-- ⛏️ MINECRAFT: Crafting Table Modal -->
+<div id="mc-crafting-modal">
+  <div class="mc-crafting-window">
+    <div class="mc-crafting-title">Crafting Table</div>
+    <div class="mc-crafting-body">
+      <!-- Grid 3x3 -->
+      <div class="mc-grid-3x3" id="mc-craft-grid">
+        <!-- Slot 1: Título (requerido) -->
+        <div class="mc-craft-slot required" data-slot="0" data-req="Nombre">
+          <span class="mc-slot-field-label">Titulo</span>
+          <input type="text" id="mc-slot-title" placeholder="...">
+        </div>
+        <!-- Slot 2: Prioridad -->
+        <div class="mc-craft-slot" data-slot="1">
+          <span class="mc-slot-field-label">Prio.</span>
+          <select id="mc-slot-priority">
+            <option value="low">Baja</option>
+            <option value="medium" selected>Media</option>
+            <option value="high">Alta</option>
+          </select>
+        </div>
+        <!-- Slot 3: Categoría -->
+        <div class="mc-craft-slot" data-slot="2">
+          <span class="mc-slot-field-label">Cat.</span>
+          <select id="mc-slot-category">
+            <option value="work">Trabajo</option>
+            <option value="personal">Personal</option>
+            <option value="health">Salud</option>
+            <option value="finance">Finanzas</option>
+            <option value="other">Otro</option>
+          </select>
+        </div>
+        <!-- Slot 4: Fecha límite -->
+        <div class="mc-craft-slot" data-slot="3">
+          <span class="mc-slot-field-label">Fecha</span>
+          <input type="date" id="mc-slot-due">
+        </div>
+        <!-- Slot 5: Descripción -->
+        <div class="mc-craft-slot" data-slot="4">
+          <span class="mc-slot-field-label">Desc.</span>
+          <textarea id="mc-slot-desc" placeholder="..."></textarea>
+        </div>
+        <!-- Slot 6: Tiempo estimado (horas) -->
+        <div class="mc-craft-slot" data-slot="5">
+          <span class="mc-slot-field-label">Hrs.</span>
+          <input type="number" id="mc-slot-est-h" placeholder="0" min="0" max="24">
+        </div>
+        <!-- Slot 7: Minutos -->
+        <div class="mc-craft-slot" data-slot="6">
+          <span class="mc-slot-field-label">Min.</span>
+          <input type="number" id="mc-slot-est-m" placeholder="0" min="0" max="59">
+        </div>
+        <!-- Slot 8: Repetición -->
+        <div class="mc-craft-slot" data-slot="7">
+          <span class="mc-slot-field-label">Recur.</span>
+          <select id="mc-slot-recur">
+            <option value="none">—</option>
+            <option value="daily">Dia</option>
+            <option value="weekly">Sem</option>
+            <option value="monthly">Mes</option>
+          </select>
+        </div>
+        <!-- Slot 9: vacío -->
+        <div class="mc-craft-slot mc-hotbar-slot-empty" data-slot="8">
+          <span class="mc-slot-icon">⬜</span>
+        </div>
+      </div>
+
+      <!-- Flecha -->
+      <div class="mc-crafting-arrow">▶</div>
+
+      <!-- Resultado -->
+      <div class="mc-result-slot" id="mc-craft-result" title="Click para craftear">
+        <div class="mc-result-icon" id="mc-craft-result-icon">📋</div>
+        <div class="mc-result-label" id="mc-craft-result-label">—</div>
+      </div>
+    </div>
+
+    <div class="mc-crafting-footer">
+      <input type="hidden" id="mc-craft-task-id">
+      <button class="btn-ghost" id="mc-craft-cancel" onclick="closeMCCrafting()">Cancelar</button>
+      <button class="btn-primary" id="mc-craft-save" onclick="saveMCCraftedTask()">Craftear</button>
+    </div>
+  </div>
+</div>
+
+<!-- ⭐ STAR WARS: Video de intro -->
+<div id="sw-video-overlay" style="display:none;position:fixed;inset:0;z-index:10000;background:#000;align-items:center;justify-content:center;">
+  <video id="sw-video" style="width:100%;height:100%;object-fit:cover;" playsinline></video>
+  <button onclick="stopSWIntroVideo()" style="position:absolute;bottom:28px;right:28px;background:rgba(0,0,0,0.45);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:7px 16px;font-size:0.8em;cursor:pointer;backdrop-filter:blur(4px);" onmouseover="this.style.background='rgba(0,0,0,0.7)';this.style.color='#fff'" onmouseout="this.style.background='rgba(0,0,0,0.45)';this.style.color='rgba(255,255,255,0.7)'">Saltar ▶</button>
+</div>
+
+<!-- ⭐ STAR WARS: badge de lado -->
+<div id="sw-side-badge">⚡ Lado Oscuro</div>
+
+<!-- ⭐ STAR WARS: notificación -->
+<div id="sw-notification">
+  <div class="sw-notif-icon">✨</div>
+  <div class="sw-notif-text"></div>
+  <button class="sw-notif-close" onclick="hideSWNotif()">✕</button>
+</div>
+
+<!-- 🧠 NEURO: Body double overlay -->
+<div id="neuro-body-double" class="neuro-body-double-overlay" style="display:none">
+  <div class="neuro-bd-avatar">👤</div>
+  <div class="neuro-bd-name" id="neuro-bd-name">Compañero de trabajo</div>
+  <div class="neuro-bd-status" id="neuro-bd-status">Trabajando contigo...</div>
+  <div class="neuro-bd-timer" id="neuro-bd-timer">00:00</div>
+  <button class="neuro-bd-close" onclick="toggleBodyDouble()">✕ Terminar sesión</button>
+</div>
+
+<!-- 🧠 NEURO: Temporizador de transición -->
+<div id="neuro-transition-bar" class="neuro-transition-bar" style="display:none">
+  <div class="neuro-transition-inner">
+    <span id="neuro-transition-label">Preparándote para el cambio...</span>
+    <div class="neuro-transition-track">
+      <div class="neuro-transition-fill" id="neuro-transition-fill"></div>
+    </div>
+    <span id="neuro-transition-secs">5</span>
+  </div>
+</div>
+
+<!-- 🧠 NEURO: Modal rutina -->
+<!-- 🎵 RICKROLL OVERLAY -->
+<div id="rr-overlay" style="display:none;position:fixed;inset:0;z-index:99999;background:#000;align-items:center;justify-content:center;">
+  <video id="rr-video" style="width:100%;height:100%;object-fit:cover;" playsinline></video>
+  <div id="rr-title" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;padding:0;gap:0;animation:rr-fadein 10s ease forwards;">
+    <span style="font-family:'Impact',sans-serif;font-size:30vw;line-height:0.85;color:#FFE600;text-transform:uppercase;text-shadow:-4px -4px 0 #000,4px -4px 0 #000,-4px 4px 0 #000,4px 4px 0 #000,0 0 60px rgba(0,0,0,0.9);display:block;text-align:center;width:100%;">GET</span>
+    <span style="font-family:'Impact',sans-serif;font-size:30vw;line-height:0.85;color:#FFE600;text-transform:uppercase;text-shadow:-4px -4px 0 #000,4px -4px 0 #000,-4px 4px 0 #000,4px 4px 0 #000,0 0 60px rgba(0,0,0,0.9);display:block;text-align:center;width:100%;">RICK</span>
+    <span style="font-family:'Impact',sans-serif;font-size:30vw;line-height:0.85;color:#FFE600;text-transform:uppercase;text-shadow:-4px -4px 0 #000,4px -4px 0 #000,-4px 4px 0 #000,4px 4px 0 #000,0 0 60px rgba(0,0,0,0.9);display:block;text-align:center;width:100%;">ROLLED</span>
+  </div>
+  <button onclick="stopRickroll()" style="position:absolute;bottom:28px;right:28px;background:rgba(0,0,0,0.45);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:7px 16px;font-size:0.8em;cursor:pointer;backdrop-filter:blur(4px);" onmouseover="this.style.background='rgba(0,0,0,0.7)';this.style.color='#fff'" onmouseout="this.style.background='rgba(0,0,0,0.45)';this.style.color='rgba(255,255,255,0.7)'">Saltar ▶</button>
+</div>
+
+<script src="assets.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
