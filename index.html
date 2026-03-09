@@ -86,6 +86,8 @@
       .price-amount{font-size:4rem}
     }
     @media(max-width:400px){.modules-grid{grid-template-columns:1fr}}
+    .btn-bmc { display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:13px 28px; background:rgba(255,221,0,.08); color:#ffd700; border:1px solid rgba(255,221,0,.2); border-radius:var(--radius); font-size:.9rem; font-weight:500; text-decoration:none; transition:all .25s; letter-spacing:.02em; }
+    .btn-bmc:hover { background:rgba(255,221,0,.14); border-color:rgba(255,221,0,.4); transform:translateY(-1px); }
   </style>
 </head>
 <body>
@@ -179,24 +181,29 @@
   <div class="divider"></div>
 
   <section class="pricing" id="descargar">
-    <p class="section-label reveal">Precio</p>
-    <h2 class="section-title reveal">Sin sorpresas</h2>
+    <p class="section-label reveal">Descargar</p>
+    <h2 class="section-title reveal">Gratis, para siempre</h2>
     <div class="price-card reveal">
-      <div class="price-amount"><sup>$</sup>15</div>
-      <p class="price-label">Pago único &middot; Para siempre</p>
+      <div class="price-amount" style="font-size:3.5rem;margin-bottom:4px">100%</div>
+      <p class="price-label">Gratis &middot; Sin suscripción &middot; Sin anuncios</p>
       <ul class="price-features">
-        <li>Todas las funciones, siempre</li>
-        <li>Actualizaciones incluidas</li>
+        <li>Todas las funciones incluidas</li>
+        <li>Actualizaciones sin costo adicional</li>
         <li>Windows y macOS</li>
         <li>App móvil iOS y Android</li>
-        <li>Sin anuncios, sin tracking</li>
-        <li>Datos 100% locales</li>
+        <li>Sin tracking, sin servidores</li>
+        <li>Datos 100% locales y tuyos</li>
       </ul>
-      <a href="https://github.com/axlhuertaq-art/Sophron_3.1.0/releases" class="btn-primary" style="width:100%;justify-content:center;border-radius:var(--radius)">
+      <a href="https://github.com/axlhuertaq-art/Sophron_3.1.0/releases" class="btn-primary" style="width:100%;justify-content:center;border-radius:var(--radius);margin-bottom:14px">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Descargar SOPHRON
       </a>
-      <p style="margin-top:20px;font-size:.75rem;color:var(--text3);font-family:'DM Mono',monospace;">Windows &middot; macOS &middot; v3.1.0</p>
+      <a href="https://buymeacoffee.com/TU_USUARIO" class="btn-bmc" target="_blank" rel="noopener">
+        ☕ Buy me a coffee
+      </a>
+      <p style="margin-top:20px;font-size:.75rem;color:var(--text3);font-family:'DM Mono',monospace;line-height:1.6;">
+        SOPHRON es gratuita por convicción.<br>Si te cambia el día a día, un café es bienvenido.
+      </p>
     </div>
   </section>
 
