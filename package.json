@@ -1,0 +1,45 @@
+{
+  "name": "sophron",
+  "version": "3.1.0",
+  "author": "Saudade Systems",
+  "description": "SOPHRON - Mente equilibrada. Tiempo controlado.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win --x64",
+    "build:mac": "electron-builder --mac",
+    "pack": "electron-builder --dir"
+  },
+  "build": {
+    "appId": "com.sophron.app",
+    "productName": "SOPHRON",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "mac": {
+      "target": [
+        { "target": "dmg", "arch": ["x64", "arm64"] }
+      ],
+      "category": "public.app-category.productivity"
+    },
+    "dmg": {
+      "title": "SOPHRON"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/.cache",
+      "!dist"
+    ]
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.0.0"
+  }
+}
